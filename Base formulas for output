@@ -1,0 +1,480 @@
+#OBJECTIVE:
+Markets: Atlanta, NYC, Boca Raton (FL), Kansas City (MO),
+Metrics: Temperature (Avg, Min, Max), Snowfall, Precipitation, Forecasted temp (shit) and forecasted precip (nooooooooope)
+Time: 2013 - Present
+
+install.packages("rnoaa")
+install.packages("ghcnd") ##doesn't work for 3.3.1
+install.packages("purrr")
+
+library(rnoaa, purrr)
+
+#ATL station is for Hartsfield-Jackson
+      ##ATL Precipitation
+atl_13_prcp <- ncdc(datasetid='GHCND', 
+     startdate = '2013-01-01', enddate = '2013-12-31',
+     datatypeid = c("PRCP", "SNOW"),
+     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+     stationid = "GHCND:USW00013874",
+     limit= 1000)
+atl_14_prcp <- ncdc(datasetid='GHCND', 
+      startdate = '2014-01-01', enddate = '2014-12-31',
+      datatypeid = c("PRCP", "SNOW"),
+      token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+      stationid = "GHCND:USW00013874",
+      limit = 1000)
+atl_15_prcp <- ncdc(datasetid='GHCND', 
+      startdate = '2015-01-01', enddate = '2015-12-31',
+      datatypeid = c("PRCP", "SNOW"),
+      token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+      stationid = "GHCND:USW00013874",
+      limit = 1000)
+atl_16_prcp <- ncdc(datasetid='GHCND', 
+      startdate = '2016-01-01', enddate = '2016-08-31',
+      datatypeid = c("PRCP", "SNOW"),
+      token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+      stationid = "GHCND:USW00013874",
+      limit = 1000)
+
+##ATL Temperature (min, max)
+atl_13_temp <- ncdc(datasetid='GHCND', 
+    startdate = '2013-01-01', enddate = '2013-12-31',
+    datatypeid = c("TMAX", "TMIN"),
+    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+    stationid = "GHCND:USW00013874",
+    limit = 1000)
+atl_14_temp <- ncdc(datasetid='GHCND', 
+    startdate = '2014-01-01', enddate = '2014-12-31',
+    datatypeid = c("TMAX", "TMIN"),
+    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+    stationid = "GHCND:USW00013874",
+    limit = 1000)
+atl_15_temp <- ncdc(datasetid='GHCND', 
+    startdate = '2015-01-01', enddate = '2015-12-31',
+    datatypeid = c("TMAX", "TMIN"),
+    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+    stationid = "GHCND:USW00013874",
+    limit = 1000)
+atl_16_temp <- ncdc(datasetid='GHCND', 
+    startdate = '2016-01-01', enddate = '2016-08-31',
+    datatypeid = c("TMAX", "TMIN"),
+    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+    stationid = "GHCND:USW00013874",
+    limit = 1000)
+
+##ATL temp avg 
+atl_13_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2013-01-01', enddate = '2013-12-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00013874",
+                    limit = 1000)
+atl_14_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2014-01-01', enddate = '2014-12-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00013874",
+                    limit = 1000)
+atl_15_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2015-01-01', enddate = '2015-12-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00013874",
+                    limit = 1000)
+atl_16_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2016-01-01', enddate = '2016-08-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00013874",
+                    limit = 1000)
+
+
+##NYC Precipitation
+NYC_13_prcp <- ncdc(datasetid='GHCND', 
+                    startdate = '2013-01-01', enddate = '2013-12-31',
+                    datatypeid = c("PRCP", "SNOW"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit= 1000)
+NYC_14_prcp <- ncdc(datasetid='GHCND', 
+                    startdate = '2014-01-01', enddate = '2014-12-31',
+                    datatypeid = c("PRCP", "SNOW"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_15_prcp <- ncdc(datasetid='GHCND', 
+                    startdate = '2015-01-01', enddate = '2015-12-31',
+                    datatypeid = c("PRCP", "SNOW"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_16_prcp <- ncdc(datasetid='GHCND', 
+                    startdate = '2016-01-01', enddate = '2016-08-31',
+                    datatypeid = c("PRCP", "SNOW"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+
+##NYC Temperature (min, max)
+NYC_13_temp <- ncdc(datasetid='GHCND', 
+                    startdate = '2013-01-01', enddate = '2013-12-31',
+                    datatypeid = c("TMAX", "TMIN"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_14_temp <- ncdc(datasetid='GHCND', 
+                    startdate = '2014-01-01', enddate = '2014-12-31',
+                    datatypeid = c("TMAX", "TMIN"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_15_temp <- ncdc(datasetid='GHCND', 
+                    startdate = '2015-01-01', enddate = '2015-12-31',
+                    datatypeid = c("TMAX", "TMIN"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_16_temp <- ncdc(datasetid='GHCND', 
+                    startdate = '2016-01-01', enddate = '2016-08-31',
+                    datatypeid = c("TMAX", "TMIN"),
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+
+##NYC temp avg 
+NYC_13_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2013-01-01', enddate = '2013-12-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_14_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2014-01-01', enddate = '2014-12-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_15_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2015-01-01', enddate = '2015-12-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+NYC_16_tavg <- ncdc(datasetid='GHCND', 
+                    startdate = '2016-01-01', enddate = '2016-08-31',
+                    datatypeid = "TAVG",
+                    token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                    stationid = "GHCND:USW00094728",
+                    limit = 1000)
+
+    
+    ##Boca Precipitation
+    Boca_13_prcp <- ncdc(datasetid='GHCND', 
+                        startdate = '2013-01-01', enddate = '2013-12-31',
+                        datatypeid = c("PRCP", "SNOW"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit= 1000)
+    Boca_14_prcp <- ncdc(datasetid='GHCND', 
+                        startdate = '2014-01-01', enddate = '2014-12-31',
+                        datatypeid = c("PRCP", "SNOW"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_15_prcp <- ncdc(datasetid='GHCND', 
+                        startdate = '2015-01-01', enddate = '2015-12-31',
+                        datatypeid = c("PRCP", "SNOW"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_16_prcp <- ncdc(datasetid='GHCND', 
+                        startdate = '2016-01-01', enddate = '2016-08-31',
+                        datatypeid = c("PRCP", "SNOW"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    
+    ##Boca Temperature (min, max)
+    Boca_13_temp <- ncdc(datasetid='GHCND', 
+                        startdate = '2013-01-01', enddate = '2013-12-31',
+                        datatypeid = c("TMAX", "TMIN"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_14_temp <- ncdc(datasetid='GHCND', 
+                        startdate = '2014-01-01', enddate = '2014-12-31',
+                        datatypeid = c("TMAX", "TMIN"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_15_temp <- ncdc(datasetid='GHCND', 
+                        startdate = '2015-01-01', enddate = '2015-12-31',
+                        datatypeid = c("TMAX", "TMIN"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_16_temp <- ncdc(datasetid='GHCND', 
+                        startdate = '2016-01-01', enddate = '2016-08-31',
+                        datatypeid = c("TMAX", "TMIN"),
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    
+    ##Boca temp avg 
+    Boca_13_tavg <- ncdc(datasetid='GHCND', 
+                        startdate = '2013-01-01', enddate = '2013-12-31',
+                        datatypeid = "TAVG",
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_14_tavg <- ncdc(datasetid='GHCND', 
+                        startdate = '2014-01-01', enddate = '2014-12-31',
+                        datatypeid = "TAVG",
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_15_tavg <- ncdc(datasetid='GHCND', 
+                        startdate = '2015-01-01', enddate = '2015-12-31',
+                        datatypeid = "TAVG",
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+    Boca_16_tavg <- ncdc(datasetid='GHCND', 
+                        startdate = '2016-01-01', enddate = '2016-08-31',
+                        datatypeid = "TAVG",
+                        token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                        stationid = "GHCND:USW00092805",
+                        limit = 1000)
+
+
+##kc Precipitation
+kc_13_prcp <- ncdc(datasetid='GHCND', 
+                     startdate = '2013-01-01', enddate = '2013-12-31',
+                     datatypeid = c("PRCP", "SNOW"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit= 1000)
+kc_14_prcp <- ncdc(datasetid='GHCND', 
+                     startdate = '2014-01-01', enddate = '2014-12-31',
+                     datatypeid = c("PRCP", "SNOW"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_15_prcp <- ncdc(datasetid='GHCND', 
+                     startdate = '2015-01-01', enddate = '2015-12-31',
+                     datatypeid = c("PRCP", "SNOW"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_16_prcp <- ncdc(datasetid='GHCND', 
+                     startdate = '2016-01-01', enddate = '2016-08-31',
+                     datatypeid = c("PRCP", "SNOW"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+
+##kc Temperature (min, max)
+kc_13_temp <- ncdc(datasetid='GHCND', 
+                     startdate = '2013-01-01', enddate = '2013-12-31',
+                     datatypeid = c("TMAX", "TMIN"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_14_temp <- ncdc(datasetid='GHCND', 
+                     startdate = '2014-01-01', enddate = '2014-12-31',
+                     datatypeid = c("TMAX", "TMIN"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_15_temp <- ncdc(datasetid='GHCND', 
+                     startdate = '2015-01-01', enddate = '2015-12-31',
+                     datatypeid = c("TMAX", "TMIN"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_16_temp <- ncdc(datasetid='GHCND', 
+                     startdate = '2016-01-01', enddate = '2016-08-31',
+                     datatypeid = c("TMAX", "TMIN"),
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+
+##kc temp avg 
+kc_13_tavg <- ncdc(datasetid='GHCND', 
+                     startdate = '2013-01-01', enddate = '2013-12-31',
+                     datatypeid = "TAVG",
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_14_tavg <- ncdc(datasetid='GHCND', 
+                     startdate = '2014-01-01', enddate = '2014-12-31',
+                     datatypeid = "TAVG",
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_15_tavg <- ncdc(datasetid='GHCND', 
+                     startdate = '2015-01-01', enddate = '2015-12-31',
+                     datatypeid = "TAVG",
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+kc_16_tavg <- ncdc(datasetid='GHCND', 
+                     startdate = '2016-01-01', enddate = '2016-08-31',
+                     datatypeid = "TAVG",
+                     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+                     stationid = "GHCND:USW00003947",
+                     limit = 1000)
+NYC Station is Central PArk
+ncdc(datasetid='GHCND', 
+     startdate = '2013-01-01', enddate = '2013-01-01', 
+     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+     stationid = "GHCND:USW00094728")
+
+Boca Raton USW00092805
+ncdc(datasetid='GHCND', 
+     startdate = '2013-01-01', enddate = '2013-01-31', 
+     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+     stationid = "GHCND:USW00092805")
+
+KAnsas City (MO Airport) USW00013988
+ncdc(datasetid='GHCND', 
+     startdate = '2013-01-01', enddate = '2013-01-31', 
+     token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+     stationid = "GHCND:USW00013988")
+
+atl_13_prc <- atl_13_prcp$data
+atl_13_avg<- atl_13_tavg$data
+atl_13_tmp<- atl_13_temp$data
+atl_14_prc<- atl_14_prcp$data
+atl_14_avg<- atl_14_tavg$data
+atl_14_tmp <- atl_14_temp$data
+atl_15_prc <- atl_15_prcp$data
+atl_15_avg <- atl_15_tavg$data
+atl_15_tmp<- atl_15_temp$data
+atl_16_prc<- atl_16_prcp$data
+atl_16_avg <- atl_16_tavg$data
+atl_16_tmp <- atl_16_temp$data
+kc_13_prc<- kc_13_prcp$data
+kc_13_avg<- kc_13_tavg$data
+kc_13_tmp<- kc_13_temp$data
+kc_14_prc <- kc_14_prcp$data
+kc_14_avg<- kc_14_tavg$data
+kc_14_tmp<- kc_14_temp$data
+kc_15_prc <- kc_15_prcp$data
+kc_15_avg<- kc_15_tavg$data
+kc_15_tmp <- kc_15_temp$data
+kc_16_prc <- kc_16_prcp$data
+kc_16_avg <- kc_16_tavg$data
+kc_16_tmp<- kc_16_temp$data
+NYC_13_prc<- NYC_13_prcp$data
+NYC_13_avg<- NYC_13_tavg$data
+NYC_13_tmp<- NYC_13_temp$data
+NYC_14_prc<- NYC_14_prcp$data
+NYC_14_avg<- NYC_14_tavg$data
+NYC_14_tmp<- NYC_14_temp$data
+NYC_15_prc<- NYC_15_prcp$data
+NYC_15_avg<- NYC_15_tavg$data
+NYC_15_tmp<- NYC_15_temp$data
+NYC_16_prc<- NYC_16_prcp$data
+NYC_16_avg<- NYC_16_tavg$data
+NYC_16_tmp <- NYC_16_temp$data
+Boca_13_prc <- Boca_13_prcp$data
+Boca_13_avg <- Boca_13_tavg$data
+Boca_13_tmp <- Boca_13_temp$data
+Boca_14_prc <- Boca_14_prcp$data
+Boca_14_avg <- Boca_14_tavg$data
+Boca_14_tmp <- Boca_14_temp$data
+Boca_15_prc <- Boca_15_prcp$data
+Boca_15_avg <- Boca_15_tavg$data
+Boca_15_tmp <- Boca_15_temp$data
+Boca_16_prc <- Boca_16_prcp$data
+Boca_16_avg <- Boca_16_tavg$data
+Boca_16_tmp <- Boca_16_temp$data
+
+all <- rbind(atl_13_prc,
+atl_13_avg,
+atl_13_tmp,
+atl_14_prc,
+atl_14_avg,
+atl_14_tmp,
+atl_15_prc,
+atl_15_avg,
+atl_15_tmp,
+atl_16_prc,
+atl_16_avg,
+atl_16_tmp,
+kc_13_prc,
+kc_13_avg,
+kc_13_tmp,
+kc_14_prc,
+kc_14_avg,
+kc_14_tmp,
+kc_15_prc,
+kc_15_avg,
+kc_15_tmp,
+kc_16_prc,
+kc_16_avg,
+kc_16_tmp,
+NYC_13_prc,
+NYC_13_avg,
+NYC_13_tmp,
+NYC_14_prc,
+NYC_14_avg,
+NYC_14_tmp,
+NYC_15_prc,
+NYC_15_avg,
+NYC_15_tmp,
+NYC_16_prc,
+NYC_16_avg,
+NYC_16_tmp,
+Boca_13_prc,
+Boca_13_avg,
+Boca_13_tmp,
+Boca_14_prc,
+Boca_14_avg,
+Boca_14_tmp,
+Boca_15_prc,
+Boca_15_avg,
+Boca_15_tmp,
+Boca_16_prc,
+Boca_16_avg,
+Boca_16_tmp)
+
+kcm <- subset(all, station == "GHCND:USW00003947")
+
+#KAnsas City doesnt have snow data. checking now
+##pulling KAnsas weather data
+out <- ncdc(datasetid = "GHCND", stationid = c("GHCND:USW00003947"), 
+            startdate = "2015-01-31", enddate = "2015-02-15", 
+            datatypeid = c("SNOW", "PRCP", "TAVG", "TMIN", "TMAX") ,
+            token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+            limit = 1000)
+unique(out$data$station)
+
+##Looking at Normal Daily data, but it only exists until 2010
+kc_normal <- ncdc(datasetid = "NORMAL_DLY",stationid='GHCND:USW00003947',
+     startdate = "2010-01-01", enddate = "2010-12-31", 
+     datatypeid = c("dly-tmax-normal", "dly-tmin-normal"),
+     limit = 1000)
+
+nyc_normal <- ncdc(datasetid = "NORMAL_DLY",stationid='GHCND:USW00094728',
+                  startdate = "2010-01-01", enddate = "2010-12-31", 
+                  datatypeid = c("dly-tmax-normal", "dly-tmin-normal"),
+                  limit = 1000)
+
+boca_normal <- ncdc(datasetid = "NORMAL_DLY",stationid='GHCND:USW00092805',
+                  startdate = "2010-01-01", enddate = "2010-12-31", 
+                  datatypeid = c("dly-tmax-normal", "dly-tmin-normal"),
+                  limit = 1000)
+
+atl_normal <- ncdc(datasetid = "NORMAL_DLY",stationid='GHCND:USW00013874',
+                  startdate = "2010-01-01", enddate = "2010-12-31", 
+                  datatypeid = c("dly-tmax-normal", "dly-tmin-normal"),
+                  limit = 1000)
+
+kc_nrm <- kc_normal$data
+nyc_nrm<- nyc_normal$data
+boca_nrm<- boca_normal$data
+atl_nrm<- atl_normal$data
+
+write.csv(rbind(kc_nrm,nyc_nrm, boca_nrm, atl_nrm), "normals.csv")
