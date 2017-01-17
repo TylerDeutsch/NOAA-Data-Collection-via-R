@@ -1,0 +1,22 @@
+install.packages("rnoaa")
+install.packages("ghcnd") ##doesn't work for 3.3.1
+install.packages("purrr")
+
+library(rnoaa, purrr)
+###Documentation: https://cran.r-project.org/web/packages/rnoaa/rnoaa.pdf
+
+##for loop created intending to revolve around variables of year, metric_type, and market
+for (year in 2013:2016)
+    for (metric_type in c("PRCP", "SNOW", "TMAX", "TMIN", "TAVG"))
+{
+  letitsnow <- 
+      ncdc(datasetid='GHCND', 
+         startdate = paste0(year,'-01-01'), enddate = paste0(year,'-12-31'),
+         datatypeid = metric_type,
+         token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU",
+         stationid = "GHCND:USW00013874",
+         limit = 1000)
+
+  assign(paste(year,metric_type,"market", sep="_"), letitsnow$data)
+    }
+
