@@ -8,11 +8,11 @@ install.packages("purrr")
 library(rnoaa, purrr)
 
 #Station ID is obtained via the website (http://www.ncdc.noaa.gov/cdo-web/search)
-##NOTE: FROM rnoaa NOTES THEMSELVES: "Note that NOAA NCDC API calls can take a long time depending on the call.  The NOAA API
-#doesn’t perform well with very long timespans, and will time out and make you angry - beware"
+#NOTE: FROM rnoaa NOTES THEMSELVES: "Note that NOAA NCDC API calls can take a long time depending on the call.  The NOAA API
+#doesn’t perform well with very long timespans, and will time out and make you angry"
 
 #rnoaa_attributes doesn't work. but ncdc_attributes does. This tells me what all the datasetid's are 
-##andtheir relevant flags
+#and their relevant flags
 vignette("ncdc_attributes", "rnoaa")
 
 For test reference, we are using Chicago.
