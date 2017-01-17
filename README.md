@@ -1,5 +1,5 @@
-## NOAA-Data-Collection-via-R
-##Collecting information from NOAA via R and rnoaa package
+# NOAA-Data-Collection-via-R
+#Collecting information from NOAA via R and rnoaa package
 
 install.packages("rnoaa")
 install.packages("ghcnd") ##doesn't work for 3.3.1
@@ -8,11 +8,11 @@ install.packages("purrr")
 library(rnoaa, purrr)
 
 #Station ID is obtained via the website (http://www.ncdc.noaa.gov/cdo-web/search)
-##NOTE: FROM rnoaa NOTES THEMSELVES: "Note that NOAA NCDC API calls can take a long time depending on the call.  The NOAA API
-#doesn’t perform well with very long timespans, and will time out and make you angry - beware"
+#NOTE: FROM rnoaa NOTES THEMSELVES: "Note that NOAA NCDC API calls can take a long time depending on the call.  The NOAA API
+#doesn’t perform well with very long timespans, and will time out and make you angry"
 
 #rnoaa_attributes doesn't work. but ncdc_attributes does. This tells me what all the datasetid's are 
-##andtheir relevant flags
+#and their relevant flags
 vignette("ncdc_attributes", "rnoaa")
 
 For test reference, we are using Chicago.
@@ -65,15 +65,14 @@ umm <- ncdc(datasetid='GHCND', locationid = 'ZIP:60606',
             startdate = '2015-08-01', enddate = '2015-08-31',
             token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU" )
 
-#_________________________________________________________________________________
-##LEaving datatypeid blank so I can see what kinds of datatypes I can get
+#Leaving datatypeid blank so I can see what kinds of datatypes I can get
 test <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094846", 
      startdate = "2014-08-01", enddate = "2014-08-01", 
      datatypeid = NULL,
      token = "EdVgOtsIZpIgAymjONKSSEiCjFWuPeLU", 
      limit = 500)
 
-##Looking at Normal Daily data, but it only exists until 2010
+#Looking at Normal Daily data, but it only exists until 2010
 ncdc(datasetid = "NORMAL_DLY",stationid='GHCND:USW00014895',
      startdate = "2010-01-01", enddate = "2010-01-31", 
      datatypeid = "dly-tmax-normal")
