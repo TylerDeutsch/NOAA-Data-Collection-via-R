@@ -1,8 +1,10 @@
-install.packages("rnoaa")
-install.packages("ghcnd") ##doesn't work for 3.3.1
-install.packages("purrr")
+##Run only once
+#install.packages("rnoaa")
+#install.packages("ghcnd") ##doesn't work for 3.3.1
+#install.packages("purrr")
+#install.packages("tidyr")
 
-library(rnoaa, purrr)
+library(rnoaa, purrr, tidyr)
 ###Documentation: https://cran.r-project.org/web/packages/rnoaa/rnoaa.pdf
 
 ##for loop created intending to revolve around variables of year, metric_type, and market
@@ -28,3 +30,6 @@ for (year in 2013:2016)
 #Combined output
 aggregated <- grep('^201.*', ls(), value=T)
 aggregated <- mapply(get, grep('^201.*', ls(), value = T))
+aggregated <- do.call(rbind, lapply(ls(pattern = "^201.*"), get))
+
+final_output <- tidyr::spread(aggregated[, c("date", "station", "datatype", "value")], key = datatype, value = value)
